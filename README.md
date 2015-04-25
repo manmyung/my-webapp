@@ -4,18 +4,6 @@
 
 http://clojure-doc.org/articles/tutorials/basic_web_development.html 
 
-## Prerequisites
-
-You will need [Leiningen][] 2.0.0 or above installed.
-
-[leiningen]: https://github.com/technomancy/leiningen
-
-## Running
-
-To start a web server for the application, run:
+## 사용 방법
 
     lein ring server
-
-## License
-
-Copyright © 2015 FIXME
