@@ -11,6 +11,9 @@
               (cc/GET "/add-location"
                       []
                       (views/add-location-page))
+              (cc/POST "/delete-location"
+                       {params :params}
+                       (views/delete-location params))
               (cc/POST "/add-location"
                        {params :params}
                        (views/add-location-results-page params))

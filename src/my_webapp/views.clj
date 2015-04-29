@@ -49,6 +49,17 @@
        [:a {:href (str "/location/" id)} "See for yourself"]
        "."])))
 
+(defn delete-location
+  [{:keys [id]}]
+  (do
+    (db/delete-location id)
+    (hic-p/html5
+      (gen-page-head "Deleted a Location")
+      header-links
+      [:h1 "Deleted a Location"]
+      [:p "Deleted (id: " id ") from the db. "]
+      )))
+
 (defn location-page
   [loc-id]
   (let [{x :x y :y} (db/get-xy loc-id)]
@@ -70,4 +81,7 @@
       [:table
        [:tr [:th "id"] [:th "x"] [:th "y"]]
        (for [loc all-locs]
-         [:tr [:td (:id loc)] [:td (:x loc)] [:td (:y loc)]])])))
+         [:tr [:td (:id loc)] [:td (:x loc)] [:td (:y loc)]])]
+      [:form {:action "/delete-location" :method "POST"}
+       [:p "id: " [:input {:type "text" :name "id"}]]
+       [:p [:input {:type "submit" :value "delete location"}]]])))

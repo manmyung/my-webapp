@@ -13,6 +13,12 @@
     (assert (= (count results) 1))
     (first (vals results))))
 
+(defn delete-location
+  [loc-id]
+  (let [results (sql/with-connection db-spec
+                                     (sql/delete-rows :locations ["id=?" loc-id]))]
+    results))
+
 (defn get-xy
   [loc-id]
   (let [results (sql/with-connection db-spec
