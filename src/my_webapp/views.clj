@@ -60,6 +60,17 @@
       [:p "Deleted (id: " id ") from the db. "]
       )))
 
+(defn update-location
+  [{:keys [id x y]}]
+  (do
+    (db/update-location id x y)
+    (hic-p/html5
+      (gen-page-head "Updated a Location")
+      header-links
+      [:h1 "Updated a Location"]
+      [:p "Updated [" x ", " y "] (id: " id ") from the db. "]
+      )))
+
 (defn location-page
   [loc-id]
   (let [{x :x y :y} (db/get-xy loc-id)]
@@ -82,6 +93,13 @@
        [:tr [:th "id"] [:th "x"] [:th "y"]]
        (for [loc all-locs]
          [:tr [:td (:id loc)] [:td (:x loc)] [:td (:y loc)]])]
+      [:hr]
       [:form {:action "/delete-location" :method "POST"}
        [:p "id: " [:input {:type "text" :name "id"}]]
-       [:p [:input {:type "submit" :value "delete location"}]]])))
+       [:p [:input {:type "submit" :value "delete"}]]]
+      [:hr]
+      [:form {:action "/update-location" :method "POST"}
+       [:p "id: " [:input {:type "text" :name "id"}]]
+       [:p "x value: " [:input {:type "text" :name "x"}]]
+       [:p "y value: " [:input {:type "text" :name "y"}]]
+       [:p [:input {:type "submit" :value "update"}]]])))

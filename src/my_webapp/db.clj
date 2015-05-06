@@ -19,6 +19,12 @@
                                      (sql/delete-rows :locations ["id=?" loc-id]))]
     results))
 
+(defn update-location
+  [loc-id x y]
+  (let [results (sql/with-connection db-spec
+                                     (sql/update-values :locations ["id=?" loc-id] {:x x :y y}))]
+    results))
+
 (defn get-xy
   [loc-id]
   (let [results (sql/with-connection db-spec

@@ -17,6 +17,9 @@
               (cc/POST "/add-location"
                        {params :params}
                        (views/add-location-results-page params))
+              (cc/POST "/update-location"
+                       {params :params}
+                       (views/update-location params))
               (cc/GET "/location/:loc-id"
                       [loc-id]
                       (views/location-page loc-id))
